@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <h2>Adicionar um Aniversrio</h2>
+    <form action="/" method="post">
+        <input
+            name="name"
+            type="text"
+            autofocus
+            required
+            autocomplete="off"
+            placeholder="Nome">
+        <input
+            type="number"
+            name="day"
+            required
+            min="1"
+            max="31"
+            autocomplete="off"
+            placeholder="Dia">
+        <input
+            name="month"
+            type="number"
+            autocomplete="off"
+            required
+            min="1"
+            max="12"
+            placeholder="Mês">
+        <input type=submit>
+    </form>
+    <div class="section">
+        <h2>Todos os Aniversários</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Mês</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in range(0, lenth) %}
+                <tr>
+                    <td>{{ rows[row].name }}</td>
+                    <td>{{ rows[row].day }} / {{ rows[row].month}} -
+                        <button class="link btn" onclick="Update({{ rows[row].id}})" id="update">Editar</button>
+                        <button class="link btn" onclick="Delete({{ rows[row].id}})" id="delete">Deletar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock%}

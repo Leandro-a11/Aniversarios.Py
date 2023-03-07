@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <h2>Deletar o Aniversário</h2>
+    <form action="/success/{{rows[0].id}}" method="get">
+        <input
+            type="text"
+            value="{{rows[0].name}}"
+            name="name"
+            disabled>
+        <input
+            type="number"
+            name="day"
+            value="{{rows[0].day}}"
+            disabled>
+        <input
+            value="{{rows[0].month}}"
+            name="month"
+            type="number"
+            disabled>
+        <input class="link" type=submit value="Deletar">
+        <a class="link" href="/">Cancelar</a>
+
+{% endblock %}
