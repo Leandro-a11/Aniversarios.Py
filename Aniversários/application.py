@@ -1,17 +1,16 @@
 import os
-
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 
-# Configure application
+# Configurar a Aplicação
 app = Flask(__name__)
 
-# Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# Configure CS50 Library to use SQLite database
+# Configurar a Lib Cs50 com o Sqlite
 db = SQL("sqlite:///birthdays.db")
 
+#Formulário inicial
 @app.route("/", methods=["GET", "POST"])
 def index():
     Name = request.form.get("name")
@@ -24,16 +23,19 @@ def index():
         rows = db.execute("SELECT id, name, day, month FROM birthdays")
         return render_template("index.html" , rows=rows , lenth=len(rows))
 
+#Rota para Deletar um cadastro
 @app.route("/delete/<id>")
 def Delete(id):
     rows = db.execute("SELECT id, name, day, month FROM birthdays WHERE id = ?", id)
     return render_template("delete.html", rows=rows)
 
+#Rota para Alterar um cadastro
 @app.route("/update/<id>")
 def Update(id):
     rows = db.execute("SELECT id, name, day, month FROM birthdays WHERE id = ?", id)
     return render_template("update.html", rows=rows)
 
+#Rota para fazer o Delete e o Update de acordo com o metodo recebido
 @app.route("/success/<id>", methods=["POST", "GET"])
 def Success(id):
     Name = request.form.get("name")
